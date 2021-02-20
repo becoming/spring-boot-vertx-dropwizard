@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.miage.filestore</groupId>
+    <groupId>tech.becoming.frameworks.filestore</groupId>
     <artifactId>vertx</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -49,7 +49,7 @@
         <junit-platform-surefire-provider.version>1.2.0</junit-platform-surefire-provider.version>
         <junit-platform-launcher.version>1.2.0</junit-platform-launcher.version>
 
-        <main.verticle>fr.miage.filestore.vertx.FilestoreVerticle</main.verticle>
+        <main.verticle>tech.becoming.frameworks.filestore.vertx.FilestoreVerticle</main.verticle>
         <slf4j.version>1.7.25</slf4j.version>
     </properties>
 

@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.miage.filestore</groupId>
+    <groupId>tech.becoming.frameworks.filestore</groupId>
     <artifactId>dropwizard</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -113,7 +113,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>fr.miage.filestore.dropwizard.FilestoreApplication</mainClass>
+                                    <mainClass>tech.becoming.frameworks.filestore.dropwizard.FilestoreApplication</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

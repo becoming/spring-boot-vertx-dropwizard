@@ -1,6 +1,6 @@
 package fr.miage.filestore;
 
-import fr.miage.filestore.vertx.FilestoreVerticle;
+import tech.becoming.frameworks.filestore.vertx.FilestoreVerticle;
 import io.vertx.core.Vertx;
 import io.vertx.junit5.Timeout;
 import io.vertx.junit5.VertxExtension;
