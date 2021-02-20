@@ -1,0 +1,33 @@
+= Vertx
+
+This application was generated using http://start.vertx.io
+
+== Setup
+
+=== Build and package:
+```
+mvn clean package
+```
+
+=== Run:
+
+==== via Maven
+```
+mvn clean package exec:java -DskipTests=true
+```
+
+*OR*
+
+==== via Java
+```bash
+java -jar vertx-0.0.1-SNAPSHOT-fat.jar --run
+```
+
+== Help
+
+* https://vertx.io/docs/[Vert.x Documentation]
+* https://stackoverflow.com/questions/tagged/vert.x?sort=newest&pageSize=15[Vert.x Stack Overflow]
+* https://groups.google.com/forum/?fromgroups#!forum/vertx[Vert.x User Group]
+* https://gitter.im/eclipse-vertx/vertx-users[Vert.x Gitter]
+
+

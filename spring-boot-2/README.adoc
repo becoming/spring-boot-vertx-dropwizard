@@ -1,0 +1,41 @@
+= Spring Boot
+
+This application was generated using https://start.spring.io/
+
+== Introduction to Spring Boot 2
+
+=== InfoQ, From Zero To Hero
+https://www.infoq.com/presentations/spring-boot-web-dev
+
+=== Introducing Spring Boot
+https://docs.spring.io/spring-boot/docs/current/reference/html/getting-started-introducing-spring-boot.html
+
+=== Building an Application with Spring Boot
+https://spring.io/guides/gs/spring-boot/
+
+== Setup
+
+=== Build and package:
+```bash
+mvn clean package
+```
+
+=== Run:
+
+==== via Maven
+```bash
+mvn clean package spring-boot:run
+```
+
+*OR*
+
+==== via Java
+```bash
+java -jar spring-boot-0.0.1-SNAPSHOT.jar
+```
+
+== Help
+
+* https://spring.io/guides/gs/spring-boot/
+* https://spring.io/guides/gs/serving-web-content/
+* https://spring.io/guides/gs/accessing-data-jpa/

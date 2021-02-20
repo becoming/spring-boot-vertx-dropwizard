@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="jerome">
+        <createTable tableName="fileitem">
+            <column name="id" type="varchar">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="mimetype" type="varchar"/>
+            <column name="creationdate" type="time"/>
+            <column name="modificationdate" type="time"/>
+            <column name="contentid" type="varchar"/>
+            <column name="version" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="fileitem_fileitem">
+            <column name="fileitem_id" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="children_id" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="fileitem_id, children_id"
+                       schemaName="public"
+                       tableName="fileitem_fileitem"/>
+
+        <addForeignKeyConstraint baseColumnNames="fileitem_id"
+                                 baseTableName="fileitem_fileitem"
+                                 constraintName="fk_fileitem_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fileitem"/>
+
+        <addForeignKeyConstraint baseColumnNames="children_id"
+                                 baseTableName="fileitem_fileitem"
+                                 constraintName="fk_children_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fileitem"/>
+    </changeSet>
+
+    <changeSet id="2" author="jerome">
+        <dropTable cascadeConstraints="true"
+                   tableName="fileitem_fileitem"/>
+        <addColumn tableName="fileitem">
+            <column name="parent" type="varchar"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="3" author="jerome">
+        <createTable tableName="accounts">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="password" type="varchar"/>
+            <column name="role" type="varchar"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="jerome">
+        <renameTable newTableName="account"
+                     oldTableName="accounts"
+                     schemaName="public"/>
+        <addColumn tableName="account">
+            <column name="email" type="varchar"/>
+        </addColumn>
+        <addUniqueConstraint columnNames="name"
+                             constraintName="const_name"
+                             tableName="account"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

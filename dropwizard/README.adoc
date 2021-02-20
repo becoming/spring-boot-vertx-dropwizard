@@ -1,0 +1,86 @@
+= Dropwizard
+
+== Setup
+
+=== Build and package:
+```bash
+mvn clean package
+```
+
+=== Run:
+
+==== via Java
+```bash
+java -jar target/dropwizard-0.0.1-SNAPSHOT.jar db migrate filestore.yaml
+
+java -jar target/dropwizard-0.0.1-SNAPSHOT.jar check
+java -jar target/dropwizard-0.0.1-SNAPSHOT.jar server filestore.yaml
+```
+
+== Help
+
+* https://www.dropwizard.io/0.6.2/getting-started.html
+
+= Diffs
+
+== Multipart form data
+
+=== Managed beans
+
+Usually in managed beans db connectivity is done before the bean is used, while in dropwizard you have to take care of that
+
+```java
+// direct method invocation for init functions
+FileService fileService = new UnitOfWorkAwareProxyFactory(hibernateBundle).create(FileServiceBean.class, FileDAO.class, dao);
+fileService.init();
+
+// VS
+
+@PostConstruct
+// managed beans by framework
+```
+
+=== Form + upload
+
+```java
+//fr.miage.filestore.dropwizard.api.resources.FilesResource.add
+
+@Valid @FormDataParam("name") String name,
+@Valid @FormDataParam("data") InputStream data
+
+// VS
+
+@Valid FileUploadForm form
+```
+
+=== Entity Manager
+
+
+```java
+//fr/miage/filestore/dropwizard/FilestoreApplication.java:29
+
+//1. Define hibernate bundle with entities
+//2. Create DAO files with the session factory
+//3. Use named queries via namedQuery() and currentSession().createNamedQuery()
+...
+HibernateBundle<AppConfig> hibernate = new HibernateBundle<AppConfig>(Person.class, FileItem.class);
+...
+bootstrap.addBundle(hibernate);
+...
+class FileDAO extends AbstractDAO<FileItem>
+
+namedQuery()
+currentSession().createNamedQuery()
+...
+final FileDAO fileDAO = new FileDAO(hibernate.getSessionFactory());
+
+// VS
+
+// Use entity manager provided by servlet container
+
+@PersistenceContext(unitName="fsPU")
+private EntityManager em;
+...
+TypedQuery<FileItem> query = em.createNamedQuery()
+
+```
